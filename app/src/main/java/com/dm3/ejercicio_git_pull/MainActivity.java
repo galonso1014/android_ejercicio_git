@@ -13,15 +13,18 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutRaiz;
     private TextView tvEstadoLuz;
     private Button btnInterruptor;
-    private TextView tvContador;
-    private int contadorPulsaciones = 0;
+
+
 
     // Estado del interruptor
     private boolean luzEncendida = false;
 
     // TODO RAMA feature/contador-luces: Declarar variable contador y referencia a tvContador
-
+    private TextView tvContador;
+    private int contadorPulsaciones = 0;
     // TODO RAMA feature/modo-noche: Declarar referencia a switchModoNoche
+    private androidx.appcompat.widget.SwitchCompat switchModoNoche;
+    private TextView tvTitulo;
 
     // TODO RAMA feature/boton-panico: Declarar referencia a btnPanico
 
@@ -59,7 +62,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // TODO RAMA feature/modo-noche: Configurar listener del switch para cambiar color de fondo
+        tvTitulo = findViewById(R.id.tvTitulo);
+        switchModoNoche = findViewById(R.id.switchModoNoche);
 
+        switchModoNoche.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(android.widget.CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    layoutRaiz.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.fondo_oscuro));
+                    tvTitulo.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.texto_oscuro));
+                } else {
+                    layoutRaiz.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.fondo_claro));
+                    tvTitulo.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.texto_claro));
+                }
+            }
+        });
         // TODO RAMA feature/boton-panico: Configurar listener del botón de pánico
     }
 }
